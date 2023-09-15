@@ -14,7 +14,7 @@
     <button class="_mybtn px-3 border-2-w" @click="addTask()">Add</button>
   </div>
   <div>
-    <TaskListComponent :taskList="tasks" />
+    <TaskListComponent :taskList="tasks" @delete-task="deleteTask" />
   </div>
 </template>
 
@@ -56,9 +56,17 @@ export default {
       this.tasks.push(newTask);
       this.task.name = "";
       this.task.note = "";
-      console.log(this.tasks);
+      //console.log(this.tasks);
     }
   },
+  deleteTask(id:number){
+    const indexToDelete = this.tasks.findIndex((task) => task.id === id);
+    if (indexToDelete >= 0) {
+        this.tasks.splice(indexToDelete, 1);
+      }else{
+        console.log('error');
+      }
+  }
 },
 
 };
